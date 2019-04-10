@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  SecondViewController.swift
 //  _SQL_Social
 //
 //  Created by Josiah Chapman on 4/9/19.
@@ -8,11 +8,12 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class SecondViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        view.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
     }
 
 
