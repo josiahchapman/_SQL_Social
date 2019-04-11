@@ -20,7 +20,7 @@
   margin: 5px 0 22px 0;
   display: inline-block;
   border: none;
-  background: #212121;
+  background: #00C42D;
 }
 
 /* Add a background color when the inputs get focus */
@@ -270,13 +270,28 @@ span.psw {
 </div>
 <button onclick="document.getElementById('id01').style.display='block'">Add To Feed</button>
 
-<!-- The Modal (contains the Sign Up form) -->
 <div id="id01" class="modal">
   <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">X</span>
   
     <div class="container">
-      <h1><font color = green>New Post</font></h1>
-
+   
+  
+      <h1><font color = green><center>New Post</center></font></h1>
+      <form class="modal-content" action="">
+         <div class="container">
+           
+    <label for="title"><font color = "white"><b>Enter Title</b></font></label>
+    <input type="text" placeholder="Enter Title" id="title"  name="title" required>
+    
+    <label for="quest"><font color = "white"><b>Enter Question</b></font></label>
+    <input type="text" placeholder="Enter Question" id="quest"  name="quest" required>
+    </div>
+    
+     <button type="submit" onclick="validate()"> <font color = "black">Submit</font></button>
+       <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+       
+        </form>
+      
 </div>
 </div>
 
