@@ -13,7 +13,9 @@
   }
   
   * {box-sizing: border-box}
+  
 /* Full-width input fields */
+
   input[type=text], input[type=password] {
   width: 100%;
   padding: 15px;
@@ -61,6 +63,17 @@ button:hover {
 .container {
   padding: 16px;
 }
+
+.feedContainer
+{
+  position: fixed;
+  bottom:0;
+  right:0;
+  background-color:blue;
+  width: 50%;
+  height: 50%;
+}
+
 
 /* The Modal (background) */
 .modal {
@@ -277,6 +290,8 @@ span.psw {
    
   
       <h1><font color = green><center>New Post</center></font></h1>
+      
+      
       <form class="modal-content" action="">
          <div class="container">
            
@@ -286,16 +301,33 @@ span.psw {
     <label for="quest"><font color = "white"><b>Enter Question</b></font></label>
     <input type="text" placeholder="Enter Question" id="quest"  name="quest" required>
     </div>
+
     
      <button type="submit" onclick="validate()"> <font color = "black">Submit</font></button>
        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
        
         </form>
+        
+        
       
 </div>
 </div>
 
+        <div class="feedContainer">
+          
+          </div>
+
+    <script>
+    var classAttr = "feedContainer";
+    var labelFor = "title";
+    var labelFontColor = "white";
+    var titleText = "this is title text";
+    var div = '<div class = '+ classAttr +'><label for = '+labelFor + '><font color ='+ labelFontColor + '><b>'+titleText + '</b></font></lable></div>'
     
+    
+
+      
+    </script>
   
   
   
