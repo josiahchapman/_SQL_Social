@@ -11,9 +11,9 @@ import Foundation
 class RegistrationInfoService {
     static let instance = RegistrationInfoService()
     
-    private var _firstName: String?
-    private var _lastName: String?
-    private var _email: String?
+    private var _firstName = ""
+    private var _lastName = ""
+    private var _email = ""
     
     public var firstName: String? {
         return _firstName
@@ -31,6 +31,12 @@ class RegistrationInfoService {
         self._firstName = fName
         self._lastName = lName
         self._email = em
+    }
+    
+    public func clearContent() {
+        self._firstName = ""
+        self._lastName = ""
+        self._email = ""
     }
     
     public func isEmailValid(email: String?) -> Bool {

@@ -17,7 +17,6 @@
 		D5C4DBCD225D676800607C30 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C4DBCC225D676800607C30 /* RegisterVC.swift */; };
 		D5C4DBCF225D677600607C30 /* CompleteRegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C4DBCE225D677600607C30 /* CompleteRegisterVC.swift */; };
 		D5C4DBD1225D678400607C30 /* StartUsingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C4DBD0225D678400607C30 /* StartUsingVC.swift */; };
-		D5C4DBD3225D67AD00607C30 /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C4DBD2225D67AD00607C30 /* ForgotPasswordVC.swift */; };
 		D5C4DBD7225D703400607C30 /* RegistrationInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C4DBD6225D703400607C30 /* RegistrationInfoService.swift */; };
 /* End PBXBuildFile section */
 
@@ -34,7 +33,6 @@
 		D5C4DBCC225D676800607C30 /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		D5C4DBCE225D677600607C30 /* CompleteRegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteRegisterVC.swift; sourceTree = "<group>"; };
 		D5C4DBD0225D678400607C30 /* StartUsingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartUsingVC.swift; sourceTree = "<group>"; };
-		D5C4DBD2225D67AD00607C30 /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
 		D5C4DBD6225D703400607C30 /* RegistrationInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationInfoService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -104,7 +102,6 @@
 				D5C4DBCC225D676800607C30 /* RegisterVC.swift */,
 				D5C4DBCE225D677600607C30 /* CompleteRegisterVC.swift */,
 				D5C4DBD0225D678400607C30 /* StartUsingVC.swift */,
-				D5C4DBD2225D67AD00607C30 /* ForgotPasswordVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -194,7 +191,6 @@
 				D5C4DBD1225D678400607C30 /* StartUsingVC.swift in Sources */,
 				D5C4DBCB225D674E00607C30 /* LoginVC.swift in Sources */,
 				D5348429225D46F600F6C9F4 /* FirstViewController.swift in Sources */,
-				D5C4DBD3225D67AD00607C30 /* ForgotPasswordVC.swift in Sources */,
 				D5C4DBCD225D676800607C30 /* RegisterVC.swift in Sources */,
 				D5C4DBD7225D703400607C30 /* RegistrationInfoService.swift in Sources */,
 			);

@@ -14,9 +14,6 @@ class RegisterVC: UIViewController {
     @IBOutlet weak var firstNameLabel: UITextField!
     @IBOutlet weak var lastNameLabel: UITextField!
     @IBOutlet weak var emailLabel: UITextField!
-    @IBOutlet weak var optionalErrorLabel: UILabel!
-    
-    private var nextError: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,21 +22,21 @@ class RegisterVC: UIViewController {
         
         nextButton.layer.cornerRadius = 23
         
-        if RegistrationInfoService.instance.firstName != nil {
+        if RegistrationInfoService.instance.firstName != "" {
             firstNameLabel.text = RegistrationInfoService.instance.firstName!
         }
         else {
             firstNameLabel.attributedPlaceholder = NSAttributedString(string: "First name", attributes: [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0, green: 0.768627451, blue: 0.1764705882, alpha: 1)])
         }
         
-        if RegistrationInfoService.instance.lastName != nil {
+        if RegistrationInfoService.instance.lastName != "" {
             lastNameLabel.text = RegistrationInfoService.instance.lastName!
         }
         else {
             lastNameLabel.attributedPlaceholder = NSAttributedString(string: "Last name", attributes: [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0, green: 0.768627451, blue: 0.1764705882, alpha: 1)])
         }
         
-        if RegistrationInfoService.instance.email != nil {
+        if RegistrationInfoService.instance.email != "" {
             emailLabel.text = RegistrationInfoService.instance.email!
         }
         else {
@@ -48,60 +45,27 @@ class RegisterVC: UIViewController {
     }
     
     @IBAction func nextButtonPressed(_ sender: Any) {
-        var isFirstNameValid = true
-        var isLastNameValid = true
-        var isEmailValid = true
-        
         if (firstNameLabel.text != nil || firstNameLabel.text != "")
         && (lastNameLabel.text != nil || lastNameLabel.text != "")
-            && RegistrationInfoService.instance.isEmailValid(email: emailLabel.text) {
-            
+            && (RegistrationInfoService.instance.isEmailValid(email: emailLabel.text)) {
+            RegistrationInfoService.instance.configure(fName: firstNameLabel.text!, lName: lastNameLabel.text!, em: emailLabel.text!)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let completeRegisterVC = storyboard.instantiateViewController(withIdentifier: "completeRegisterVC")
+            self.present(completeRegisterVC, animated: false, completion: nil)
         }
         else {
             if firstNameLabel.text == nil || firstNameLabel.text == "" {
-                isFirstNameValid = false
+                firstNameLabel.attributedPlaceholder = NSAttributedString(string: "* Please enter your first name", attributes: [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.8284956813, green: 0, blue: 0, alpha: 1)])
             }
             
             if lastNameLabel.text == nil || lastNameLabel.text == "" {
-                isLastNameValid = false
+                lastNameLabel.attributedPlaceholder = NSAttributedString(string: "* Please enter your last name", attributes: [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.8284956813, green: 0, blue: 0, alpha: 1)])
             }
             
             if RegistrationInfoService.instance.isEmailValid(email: emailLabel.text) == false {
-                isEmailValid = false
-            }
-            
-            if !isFirstNameValid {
-                if !isLastNameValid {
-                    if !isEmailValid {
-                        self.nextError = "Please enter your first and last name and a valid email."
-                    }
-                    else {
-                        self.nextError = "Please enter your first and last name."
-                    }
-                }
-                else if !isEmailValid {
-                    self.nextError = "Please enter your first name and a valid email."
-                }
-                else {
-                    self.nextError = "Please enter your first name."
-                }
-            }
-            else if !isLastNameValid {
-                if !isEmailValid {
-                    self.nextError = "Please enter your last name and a valid email."
-                }
-                else {
-                    self.nextError = "Please enter your last name."
-                }
-            }
-            else if !isEmailValid {
-                self.nextError = "Please enter a valid email."
+                emailLabel.attributedPlaceholder = NSAttributedString(string: "* Please enter a valid email address", attributes: [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.8284956813, green: 0, blue: 0, alpha: 1)])
             }
         }
         
-        if nextError != nil {
-            optionalErrorLabel.isHidden = false
-            optionalErrorLabel.text = nextError!
-        }
     }
 }
