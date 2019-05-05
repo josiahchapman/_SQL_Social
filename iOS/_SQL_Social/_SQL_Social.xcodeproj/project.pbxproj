@@ -13,6 +13,15 @@
 		D534842E225D46F600F6C9F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D534842C225D46F600F6C9F4 /* Main.storyboard */; };
 		D5348430225D46F700F6C9F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D534842F225D46F700F6C9F4 /* Assets.xcassets */; };
 		D5348433225D46F700F6C9F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5348431225D46F700F6C9F4 /* LaunchScreen.storyboard */; };
+		D56D9679227E532100983777 /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56D9678227E532100983777 /* TitleCell.swift */; };
+		D56D967B227E562900983777 /* Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56D967A227E562900983777 /* Title.swift */; };
+		D56D967D227E61C200983777 /* PostDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56D967C227E61C200983777 /* PostDetailVC.swift */; };
+		D56D967F227E66E000983777 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56D967E227E66E000983777 /* CommentCell.swift */; };
+		D56D9681227E67D700983777 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56D9680227E67D700983777 /* Comment.swift */; };
+		D56D9683227E6E9D00983777 /* QuestionInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56D9682227E6E9D00983777 /* QuestionInfoService.swift */; };
+		D56D9685227E79D300983777 /* MoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56D9684227E79D300983777 /* MoreCell.swift */; };
+		D56D9687227E7A4600983777 /* MoreContentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56D9686227E7A4600983777 /* MoreContentVC.swift */; };
+		D56D9689227E7CC000983777 /* ProfileSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56D9688227E7CC000983777 /* ProfileSettingsVC.swift */; };
 		D5C4DBCB225D674E00607C30 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C4DBCA225D674E00607C30 /* LoginVC.swift */; };
 		D5C4DBCD225D676800607C30 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C4DBCC225D676800607C30 /* RegisterVC.swift */; };
 		D5C4DBCF225D677600607C30 /* CompleteRegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C4DBCE225D677600607C30 /* CompleteRegisterVC.swift */; };
@@ -29,6 +38,15 @@
 		D534842F225D46F700F6C9F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D5348432225D46F700F6C9F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D5348434225D46F700F6C9F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D56D9678227E532100983777 /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
+		D56D967A227E562900983777 /* Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Title.swift; sourceTree = "<group>"; };
+		D56D967C227E61C200983777 /* PostDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailVC.swift; sourceTree = "<group>"; };
+		D56D967E227E66E000983777 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		D56D9680227E67D700983777 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		D56D9682227E6E9D00983777 /* QuestionInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionInfoService.swift; sourceTree = "<group>"; };
+		D56D9684227E79D300983777 /* MoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreCell.swift; sourceTree = "<group>"; };
+		D56D9686227E7A4600983777 /* MoreContentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreContentVC.swift; sourceTree = "<group>"; };
+		D56D9688227E7CC000983777 /* ProfileSettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsVC.swift; sourceTree = "<group>"; };
 		D5C4DBCA225D674E00607C30 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		D5C4DBCC225D676800607C30 /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		D5C4DBCE225D677600607C30 /* CompleteRegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteRegisterVC.swift; sourceTree = "<group>"; };
@@ -82,6 +100,8 @@
 		D5C4DBC6225D66E500607C30 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D56D967A227E562900983777 /* Title.swift */,
+				D56D9680227E67D700983777 /* Comment.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -89,6 +109,9 @@
 		D5C4DBC7225D66EA00607C30 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D56D9678227E532100983777 /* TitleCell.swift */,
+				D56D967E227E66E000983777 /* CommentCell.swift */,
+				D56D9684227E79D300983777 /* MoreCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -102,6 +125,9 @@
 				D5C4DBCC225D676800607C30 /* RegisterVC.swift */,
 				D5C4DBCE225D677600607C30 /* CompleteRegisterVC.swift */,
 				D5C4DBD0225D678400607C30 /* StartUsingVC.swift */,
+				D56D967C227E61C200983777 /* PostDetailVC.swift */,
+				D56D9686227E7A4600983777 /* MoreContentVC.swift */,
+				D56D9688227E7CC000983777 /* ProfileSettingsVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -110,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				D5C4DBD6225D703400607C30 /* RegistrationInfoService.swift */,
+				D56D9682227E6E9D00983777 /* QuestionInfoService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -185,14 +212,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D56D967B227E562900983777 /* Title.swift in Sources */,
 				D5C4DBCF225D677600607C30 /* CompleteRegisterVC.swift in Sources */,
 				D534842B225D46F600F6C9F4 /* SecondViewController.swift in Sources */,
 				D5348427225D46F600F6C9F4 /* AppDelegate.swift in Sources */,
+				D56D9679227E532100983777 /* TitleCell.swift in Sources */,
+				D56D9687227E7A4600983777 /* MoreContentVC.swift in Sources */,
+				D56D9685227E79D300983777 /* MoreCell.swift in Sources */,
 				D5C4DBD1225D678400607C30 /* StartUsingVC.swift in Sources */,
 				D5C4DBCB225D674E00607C30 /* LoginVC.swift in Sources */,
+				D56D967D227E61C200983777 /* PostDetailVC.swift in Sources */,
+				D56D9681227E67D700983777 /* Comment.swift in Sources */,
+				D56D9689227E7CC000983777 /* ProfileSettingsVC.swift in Sources */,
+				D56D9683227E6E9D00983777 /* QuestionInfoService.swift in Sources */,
 				D5348429225D46F600F6C9F4 /* FirstViewController.swift in Sources */,
 				D5C4DBCD225D676800607C30 /* RegisterVC.swift in Sources */,
 				D5C4DBD7225D703400607C30 /* RegistrationInfoService.swift in Sources */,
+				D56D967F227E66E000983777 /* CommentCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
