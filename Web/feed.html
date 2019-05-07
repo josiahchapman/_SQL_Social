@@ -67,11 +67,10 @@ button:hover {
 .feedContainer
 {
   position: fixed;
-  bottom:0;
-  right:0;
+  bottom:120px;
   background-color:blue;
-  width: 50%;
-  height: 50%;
+  width: 100%;
+  height: 75%;
 }
 
 
@@ -91,9 +90,17 @@ button:hover {
 }
 
 /* Modal Content/Box */
-.modal-content {
+.modalc{
   background-color: #C4C4C4;
-  margin: 5% auto 29% auto; /* 5% from the top, 15% from the bottom and centered */
+  position: fixed;
+  bottom: 50px;
+  border: 1px solid blue;
+  width: 100%; /* Could be more or less, depending on screen size */
+}
+
+.modal-content1 {
+  background-color: #C4C4C4;
+  top: 100px;
   border: 1px solid blue;
   width: 80%; /* Could be more or less, depending on screen size */
 }
@@ -264,7 +271,7 @@ span.psw {
  
    <center>
      
-  <div class="modal-content">
+  <div class="modal-content1">
   <h><font color= #00C42D  size= 60> _feed</font></h>
   </div>
   
@@ -281,17 +288,18 @@ span.psw {
   <a href="">Settings</a>
 
 </div>
+<div class="modalc">
 <button onclick="document.getElementById('id01').style.display='block'">Add To Feed</button>
+</div>
 
 <div id="id01" class="modal">
   <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">X</span>
   
     <div class="container">
    
-  
+    
       <h1><font color = green><center>New Post</center></font></h1>
-      
-      
+
       <form class="modal-content" action="">
          <div class="container">
            
