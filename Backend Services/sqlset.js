@@ -23,28 +23,20 @@ conn.connect(function(err)
 
 
 
-
-
-     // Drop EMPLOYEES table if Exists!!
-     var sql1 = "DROP TABLE IF EXISTS Employees ";
-
-     conn.query(sql1, function(err, results)
-      {
-         if (err) console.log("Oops... Something went wrong");
-         console.log("Table EMPLOYEES dropped");
-     });
-
      // Create EMPLOYEES Table.
-     var sql2 = "CREATE TABLE AppUser" +
-         " (Email VARCHAR(25), " +
-         " Password VARCHAR(20), " +
-         " First_Name VARCHAR(255), " +
-         " Last_Name VARCHAR(255), " +
-         " PRIMARY KEY (Email) )";
+     var sql2 = "CREATE TABLE Composes" +
+         " ( id int NOT NULL AUTO_INCREMENT, " +
+         " vote_count int, " +
+         " Title VARCHAR(255), " +
+         " Answer_Count int, " +
+         " Body VARCHAR(300), " +
+         " PRIMARY KEY (id) )";
+
+
 
      conn.query(sql2, function(err, results) {
          if (err) throw err;
-         console.log("Table Appuser created");
+         console.log("Query successful");
      });
 
 

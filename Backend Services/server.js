@@ -23,14 +23,17 @@ var server = http.createServer(function (req, res)
     }
     console.log("Connected to SQL!");
 
+
   var dataReq = req.url.split('-' , 50)
+
 
   if (dataReq[0] == '/register')
   {
     // for /register-email-password-firstname-Last_Name
 
-    var query1 = " insert into user (Email)"
-                +    "values('"+dataReq[1]+"')";
+    var query1 = " insert into user (Email, Password, First_Name, Last_Name)"
+                + "values('"+dataReq[1]+"', '"+dataReq[2]+"', '"+dataReq[3]+"','"+dataReq[4]+"')";
+
 
                     conn.query(query1, function(err, results)
                      {
@@ -46,6 +49,7 @@ var server = http.createServer(function (req, res)
 
           // res.end();
          }
+  else if (dataReq)
 
 
     else
