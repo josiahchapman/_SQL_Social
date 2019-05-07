@@ -1,4 +1,31 @@
-
+/* SQL Table and Attribute names:
+ * APP_USER
+ * - EMAIL
+ * - PASSWORD_HASH
+ * - FIRST_NAME
+ * - LAST_NAME
+ *
+ * POST
+ * - id
+ * - vote_count
+ * - Title
+ * - Answer_Count
+ * - Body
+ *
+ * ANSWERS
+ * - USER_EMAIL
+ * - POST_ID
+ * - BODY
+ *
+ * COMPOSES
+ * - USER_EMAIL
+ * - POST_ID
+ *
+ * VOTES
+ * - USER_EMAIL
+ * - POST_ID
+ * - DID_UPVOTE
+ */
 
 var mysql = require('mysql');
 
@@ -9,7 +36,7 @@ var conn = mysql.createConnection
   host: "127.0.0.1",
   port: "3306",
   user: "root",
-  password: "Walton43$"
+  password: "AdultIntern1"
 });
 
 
@@ -24,13 +51,11 @@ conn.connect(function(err)
 
 
      // Create EMPLOYEES Table.
-     var sql2 = "CREATE TABLE Composes" +
-         " ( id int NOT NULL AUTO_INCREMENT, " +
-         " vote_count int, " +
-         " Title VARCHAR(255), " +
-         " Answer_Count int, " +
-         " Body VARCHAR(300), " +
-         " PRIMARY KEY (id) )";
+     var sql2 = "CREATE TABLE ANSWERS" +
+         " ( USER_EMAIL VARCHAR(255), " +
+         " POST_ID int, " +
+         " BODY VARCHAR(300), " +
+         " PRIMARY KEY (USER_EMAIL, POST_ID) )";
 
 
 

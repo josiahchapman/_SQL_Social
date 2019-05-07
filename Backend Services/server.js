@@ -7,7 +7,7 @@ var conn = mysql.createConnection
   host: "127.0.0.1",
   port: "3306",
   user: "root",
-  password: "Walton43$"
+  password: "AdultIntern1"
 });
 
 
@@ -49,7 +49,7 @@ var server = http.createServer(function (req, res)
 
           // res.end();
          }
-  else if (dataReq)
+  //else if (dataReq)
 
 
     else
