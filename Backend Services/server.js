@@ -1,14 +1,11 @@
 /* List of *functions*
- * verifyLogin-email-passwordhash => true/false
+ * // verifyLogin-email-passwordhash => true/false
  * register-email-passwordhash-firstname-lastname
  *
  * incrementVoteCount-postid
  * decrementVoteCount-postid
  *
- * checkVoteStatus-email-postid => (Returns "did not vote" if votes(email, postid) tuple does not exist. Returns true if tuple exists and USER_DID_UPVOTE is true. Returns false otherwise.)
- {
-  "voteStatus": "did-not-vote" OR "true" OR "false"
- }
+ * // checkVoteStatus-email-postid => (Returns "did not vote" if votes(email, postid) tuple does not exist. Returns true if tuple exists and USER_DID_UPVOTE is true. Returns false otherwise.)
  *
  * incrementAnswerCount-postid
  * decrementAnswerCount-postid
@@ -43,12 +40,13 @@ var conn = mysql.createConnection
 
 var server = http.createServer(function (req, res)
 {
+  try {
   conn.connect(function(err)
   {
-    if (err)
-    {
-      throw err;
-    }
+//    if (err)
+//    {
+//      throw err;
+//    }
     console.log("Connected to SQL!");
 
 
@@ -77,22 +75,37 @@ var server = http.createServer(function (req, res)
     else if  (dataReq[0] == '/verifyLogin')
     {
       //-email-passwordhash
-      var query = "SELECT USER.EMAIL AND USER.PASSWORD_HASH "
-                + "FROM USER "
-                + "WHERE USER.EMAIL = " + dataReq[1];
+      var query = "SELECT APP_USER.EMAIL, APP_USER.PASSWORD_HASH "
+                + "FROM APP_USER "
+                + "WHERE APP_USER.EMAIL = \'" + dataReq[1] +"\'";
 
       conn.query(query, function(err, results)
       {
         if (err)
         {
           console.log(err)
+          res.writeHead(200, {'Content-Type': 'application/json'});
+          res.write(JSON.stringify({message: "does-not-exist"})); // not sure how to handle results...
         }
         else
         {
           res.writeHead(200, {'Content-Type': 'application/json'});
-          res.write(JSON.stringify({message: results})); // not sure how to handle results...
+          res.write(JSON.stringify({results})); // not sure how to handle results...
+          console.log(results);
         }
       });
+    }
+    else if {
+
+    }
+    else if {
+
+    }
+    else if {
+
+    }
+    else if {
+      
     }
     else if (dataReq[0] == '/CreatePost')
     {
@@ -134,7 +147,7 @@ var server = http.createServer(function (req, res)
     else if (dataReq[0] == '/incrementVoteCount')
     {
                         // for /CreatePost-USER_EMAIL-POST_ID-BODY
-      if ()
+      //if ()
 
       var query1 = " insert into VOTES( USER_EMAIL, POST_ID, DID_UPVOTE)"
                               + "values('"+dataReq[1]+"', '"+dataReq[2]+"', '"+dataReq[3]+"')";
@@ -155,18 +168,23 @@ var server = http.createServer(function (req, res)
     else if (dataReq[0] == '/checkVoteStatus')
     {
 
-      var query1 = "select DID_UPVOTE from votes"
-                  + "where "+ dataReq[2] +"= votes.POST_ID and "+ dataReq[3]+"= votes.USER_EMAIL";
+      var query1 = "select DID_UPVOTE from votes "
+                  + "where votes.POST_ID = \'"+ dataReq[1] +"\' and votes.USER_EMAIL = \'"+ dataReq[2]+"\'";
 
 
       conn.query(query1, function(err, results)
       {
-        if (err) console.log(err);
+        if (err)
+        {
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.write(JSON.stringify({ message: "did-not-vote"}));
+        }
+        else
+        {
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.write(JSON.stringify({results}));
+        }
       });
-
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-
-      res.write(JSON.stringify({ message: "QUERY SUCCESSFUL"}));
                     //     res.write('<html><body><p>This is home Page.</p></body></html>');
 
                         // res.end();
@@ -178,7 +196,15 @@ var server = http.createServer(function (req, res)
       res.end('Invalid Request!');
 
 });
+
+} // end of try block
+catch (e) {
+  console.log(e);
+}
+
 });
+
+
 
 server.listen(5000); //6 - listen for any incoming requests
 
