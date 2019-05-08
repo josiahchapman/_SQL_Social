@@ -1,4 +1,4 @@
-/* List of *functions*
+om/* List of *functions*
  * // verifyLogin-email-passwordhash => true/false
  * register-email-passwordhash-firstname-lastname
  *
@@ -74,7 +74,6 @@ var server = http.createServer(function (req, res)
     }
     else if  (dataReq[0] == '/verifyLogin')
     {
-      //-email-passwordhash
       var query = "SELECT APP_USER.EMAIL, APP_USER.PASSWORD_HASH "
                 + "FROM APP_USER "
                 + "WHERE APP_USER.EMAIL = \'" + dataReq[1] +"\'";
@@ -83,7 +82,7 @@ var server = http.createServer(function (req, res)
       {
         if (err)
         {
-          console.log(err)
+          console.log(err);
           res.writeHead(200, {'Content-Type': 'application/json'});
           res.write(JSON.stringify({message: "does-not-exist"})); // not sure how to handle results...
         }
@@ -95,17 +94,21 @@ var server = http.createServer(function (req, res)
         }
       });
     }
-    else if {
+    else if (dataReq[0] == '/incrementVoteCount')
+    {
 
     }
-    else if {
+    else if (dataReq[0] == '/decrementVoteCount')
+    {
 
     }
-    else if {
+    else if (dataReq[0] == '/incrementAnswerCount')
+    {
 
     }
-    else if {
-      
+    else if (dataReq[0] == '/decrementAnswerCount')
+    {
+
     }
     else if (dataReq[0] == '/CreatePost')
     {
@@ -186,10 +189,24 @@ var server = http.createServer(function (req, res)
         }
       });
                     //     res.write('<html><body><p>This is home Page.</p></body></html>');
-
                         // res.end();
     }
+    else if (dataReq[0] == '/createAnswerOnPost')
+    {
 
+      var query1 = "insert into answers (BODY) values(\'"+ dataReq[3] +"\') where post.id = \'"
+      + dataReq[2] +"\' and APP_USER.EMAIL = \'"+ dataReq[1] + "\'";
+
+
+      conn.query(query1, function(err, results)
+      {
+
+        if (err) console.log(err);
+      });
+
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+
+      res.write(JSON.stringify({ message: "QUERY SUCCESSFUL"}));
 
 
     else
