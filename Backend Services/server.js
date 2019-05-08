@@ -1,4 +1,4 @@
-om/* List of *functions*
+/* List of *functions*
  * // verifyLogin-email-passwordhash => true/false
  * register-email-passwordhash-firstname-lastname
  *
