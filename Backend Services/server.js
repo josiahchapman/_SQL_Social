@@ -91,6 +91,33 @@ var server = http.createServer(function (req, res)
                          }
 
 
+                        else if (dataReq[0] == '/checkVoteStatus')
+                {
+                        // for /CreatePost-USER_EMAIL-POST_ID-BODY
+                         if ()
+
+
+
+
+
+                  var query1 = " insert into VOTES( USER_EMAIL, POST_ID, DID_UPVOTE)"
+                              + "values('"+dataReq[1]+"', '"+dataReq[2]+"', '"+dataReq[3]+"')";
+
+
+                                  conn.query(query1, function(err, results)
+                                   {
+                                      if (err) console.log(err);
+                                  });
+
+                         res.writeHead(200, { 'Content-Type': 'application/json' });
+
+                         res.write(JSON.stringify({ message: "QUERY SUCCESSFUL"}));
+                    //     res.write('<html><body><p>This is home Page.</p></body></html>');
+
+                        // res.end();
+                       }
+
+
 
     else
         res.end('Invalid Request!');
