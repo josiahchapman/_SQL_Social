@@ -110,23 +110,40 @@ var server = http.createServer(function (req, res)
     {
 
     }
-    else if (dataReq[0] == '/CreatePost')
+    else if (dataReq[0] == '/createPost')
     {
-      // for /CreatePost-id-vote_count-Title-Answer_count-body
-      var query1 = " insert into POST ( id , vote_count, Title, Answer_Count, Body)"
-                + "values('"+dataReq[1]+"', '"+dataReq[2]+"', '"+dataReq[3]+"','"+dataReq[4]+"','"+dataReq[5]+"')";
+      // for /createPost-email-Title-body
+      var query1 = "insert into POST (vote_count, Title, Answer_Count, Body) "
+                + "values(0, '" + dataReq[2] + "', 0, '"+dataReq[3]+"')";
 
+//      var query2 = "insert into composes (USER_EMAIL, POST_ID) "
+//                 + "values('" + dataReq[1] + "', (SELECT POST.ID FROM ))";
+        var query2 = "SELECT ID FROM POST";
 
       conn.query(query1, function(err, results)
       {
-        if (err) console.log(err);
+        if (err) {
+          // error
+          console.log(err);
+        }
       });
-
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.write(JSON.stringify({ message: "QUERY SUCCESSFUL"}));
-             //     res.write('<html><body><p>This is home Page.</p></body></html>');
-
-                 // res.end();
+      conn.query(query2, function(err, results)
+      {
+        if (err) {
+          console.log(err);
+        } else {
+            var mostRecentID = results[results.length-1];
+            console.log(mostRecentID.ID);
+            var query3 = "insert into composes (USER_EMAIL, POST_ID) "
+                       + "values('" + dataReq[1] + "', '"+ mostRecentID.ID +"')";
+            conn.query(query3, function(q3Err, q3Results)
+            {
+              if (q3Err) {
+                console.log(q3Err);
+              }
+            });
+        }
+      });
     }
     else if (dataReq[0] == '/CreateComment')
     {
@@ -195,7 +212,7 @@ var server = http.createServer(function (req, res)
     {
 
       var query1 = "insert into answers (BODY) values(\'"+ dataReq[3] +"\') where post.id = \'"
-      + dataReq[2] +"\' and APP_USER.EMAIL = \'"+ dataReq[1] + "\'";
+                    + dataReq[2] +"\' and APP_USER.EMAIL = \'"+ dataReq[1] + "\'";
 
 
       conn.query(query1, function(err, results)
@@ -209,6 +226,64 @@ var server = http.createServer(function (req, res)
       res.write(JSON.stringify({ message: "QUERY SUCCESSFUL"}));
 
     }
+    else if (dataReq[0] == '/createPost')
+    {
+    //  createPost-email-title-body
+
+      var query1 = "insert into POST (title, body) values(\'"+ dataReq[2] +"\',"+ dataReq[3] +"\')
+                 + "insert into composes(USER_EMAIL) values(\'"+ dataReq[1] +");"
+
+      conn.query(query1, function(err, results)
+      {
+
+        if (err) console.log(err);
+      });
+
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+
+      res.write(JSON.stringify({ message: "QUERY SUCCESSFUL"}));
+
+    }
+    else if (dataReq[0] == '/getProfileInfoForUser')
+    {
+      // getProfileInfoForUser-email => user.email
+
+      var query1 = "SELECT PASSWORD_HASH from APP_USER WHERE APP_USER.email = '"+dataReq[1]+"'";
+
+      conn.query(query1, function(err, results)
+      {
+        if (err) {
+          console.log(err);
+        } else {
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.write(JSON.stringify({results}));
+        }
+      });
+    }
+    else if (dataReq[0] == '/updateProfileInfoForUser')
+    {
+      //updateProfileInfoForUser-oldEmail-newEmail-passwordhash
+
+      var query1 = "Update APP_USER " +
+                   "Set PASSWORD_HASH = '"+dataReq[3]+"', EMAIL = '"+dataReq[2]+"' "+
+                   "Where EMAIL = '"+dataReq[1]+"'";
+
+      conn.query(query1, function(err, results)
+      {
+
+        if (err)
+        {
+          console.log(err);
+        }
+        else
+        {
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.write(JSON.stringify({message: "Query Successful"}));
+        }
+      });
+    }
+
+
 
     else
       res.end('Invalid Request!');
@@ -216,7 +291,8 @@ var server = http.createServer(function (req, res)
 });
 
 } // end of try block
-catch (e) {
+catch (e)
+{
   console.log(e);
 }
 
