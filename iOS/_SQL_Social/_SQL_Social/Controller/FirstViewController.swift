@@ -24,8 +24,32 @@ class FirstViewController: UIViewController {
         
         view.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
         newPostButton.layer.cornerRadius = 37.5
-        
-        
+
+        let url = URL(string: "http://localhost:5000/getProfileInfoForUser-ih8xcode")
+  
+        URLSession.shared.dataTask(with: url!) { (data, response, error) in
+
+            if error != nil {
+       
+                // error
+                print(String(describing: error?.localizedDescription))
+            } else {
+                print(String(describing: response))
+                print(String(describing: data))
+                // no error
+                
+                //let dataAsString = String(data: data!, encoding: .utf8)
+           
+                do {
+                 
+                    let profileInformation = try JSONDecoder().decode(ProfileInformation.self, from: data!)
+                    print(profileInformation.passwordHash)
+                } catch let jsonErr {
+               
+                    print(jsonErr)
+                }
+            }
+            }.resume()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -37,44 +61,44 @@ class FirstViewController: UIViewController {
         tableView.reloadData()
     }
     
-    func getJSONFromURL() {
-        let url = NSURL(string: postURL)
-        
-        //fetching the data from the url
-        URLSession.shared.dataTask(with: (url as? URL)!, completionHandler: {(data, response, error) -> Void in
-            
-            if let jsonObj = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary {
-                
-                //printing the json in console
-                print(jsonObj!.value(forKey: "title")!)
-                
-                //getting the avengers tag array from json and converting it to NSArray
-                if let heroeArray = jsonObj!.value(forKey: "avengers") as? NSArray {
-                    //looping through all the elements
-                    for heroe in heroeArray{
-                        
-                        //converting the element to a dictionary
-                        if let heroeDict = heroe as? NSDictionary {
-                            
-                            //getting the name from the dictionary
-                            if let name = heroeDict.value(forKey: "name") {
-                                
-                                //adding the name to the array
-                                self.nameArray.append((name as? String)!)
-                            }
-                            
-                        }
-                    }
-                }
-                
-                OperationQueue.main.addOperation({
-                    //calling another function after fetching the json
-                    //it will show the names to label
-                    self.showNames()
-                })
-            }
-        }).resume()
-    }
+//    func getJSONFromURL() {
+//        let url = NSURL(string: postURL)
+//        
+//        //fetching the data from the url
+//        URLSession.shared.dataTask(with: (url as? URL)!, completionHandler: {(data, response, error) -> Void in
+//            
+//            if let jsonObj = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary {
+//                
+//                //printing the json in console
+//                print(jsonObj!.value(forKey: "title")!)
+//                
+//                //getting the avengers tag array from json and converting it to NSArray
+//                if let heroeArray = jsonObj!.value(forKey: "avengers") as? NSArray {
+//                    //looping through all the elements
+//                    for heroe in heroeArray{
+//                        
+//                        //converting the element to a dictionary
+//                        if let heroeDict = heroe as? NSDictionary {
+//                            
+//                            //getting the name from the dictionary
+//                            if let name = heroeDict.value(forKey: "name") {
+//                                
+//                                //adding the name to the array
+//                                self.nameArray.append((name as? String)!)
+//                            }
+//                            
+//                        }
+//                    }
+//                }
+//                
+//                OperationQueue.main.addOperation({
+//                    //calling another function after fetching the json
+//                    //it will show the names to label
+//                    self.showNames()
+//                })
+//            }
+//        }).resume()
+//    }
     
     @IBAction func newPostButtonPressed(_ sender: Any) {
         //
