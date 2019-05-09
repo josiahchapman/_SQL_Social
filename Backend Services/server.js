@@ -226,24 +226,6 @@ var server = http.createServer(function (req, res)
       res.write(JSON.stringify({ message: "QUERY SUCCESSFUL"}));
 
     }
-    else if (dataReq[0] == '/createPost')
-    {
-    //  createPost-email-title-body
-
-      var query1 = "insert into POST (title, body) values(\'"+ dataReq[2] +"\',"+ dataReq[3] +"\')
-                 + "insert into composes(USER_EMAIL) values(\'"+ dataReq[1] +");"
-
-      conn.query(query1, function(err, results)
-      {
-
-        if (err) console.log(err);
-      });
-
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-
-      res.write(JSON.stringify({ message: "QUERY SUCCESSFUL"}));
-
-    }
     else if (dataReq[0] == '/getProfileInfoForUser')
     {
       // getProfileInfoForUser-email => user.email
@@ -283,6 +265,7 @@ var server = http.createServer(function (req, res)
       });
     }
 
+    //getAllPosts => (all post attributes for every post)
 
 
     else
