@@ -1,26 +1,24 @@
 /* List of *functions*
  * // verifyLogin-email-passwordhash => true/false
- * register-email-passwordhash-firstname-lastname
+ * // register-email-passwordhash-firstname-lastname
  *
- * incrementVoteCount-postid
- * decrementVoteCount-postid
+ * // incrementVoteCount-postid
+ * // decrementVoteCount-postid
  *
  * // checkVoteStatus-email-postid => (Returns "did not vote" if votes(email, postid) tuple does not exist. Returns true if tuple exists and USER_DID_UPVOTE is true. Returns false otherwise.)
  *
- * incrementAnswerCount-postid
- * decrementAnswerCount-postid
+ * // incrementAnswerCount-postid
+ * // decrementAnswerCount-postid
  *
- * createAnswerOnPost-email-postid-body
- * createPost-email-title-body
+ * // createAnswerOnPost-email-postid-body
+ * // createPost-email-title-body
  *
- * getProfileInfoForUser-email => user.email
- * updateProfileInfoForUser-email-passwordhash
+ * // getProfileInfoForUser-email => user.email
+ * // updateProfileInfoForUser-email-passwordhash
  *
  * getAllPosts => (all post attributes for every post)
  * getAllPostsForUser-email-postid => (all post attributes for posts where user.email = email)
  * getAllAnswersForPost-postid => (answers.body and user.email for answer tuples where answers.postid = postid)
- *
- * changePassword-email-passwordhash
  */
 
 
@@ -56,7 +54,7 @@ var server = http.createServer(function (req, res)
     if (dataReq[0] == '/register')
     {
     // for /register-email-password_hash-firstname-Last_Name
-      var query1 = " insert into APP_USER (Email, PASSWORD_HASH, First_Name, Last_Name)"
+      var query1 = " insert into APP_USER (Email, PASSWORD_HASH, First_Name, Last_Name) "
                 + "values('"+dataReq[1]+"', '"+dataReq[2]+"', '"+dataReq[3]+"','"+dataReq[4]+"')";
 
 
@@ -96,19 +94,99 @@ var server = http.createServer(function (req, res)
     }
     else if (dataReq[0] == '/incrementVoteCount')
     {
+        var query1 = "SELECT vote_count FROM POST WHERE POST.ID = '" + dataReq[1] + "'";
 
+        conn.query(query1, function(err, results)
+        {
+          if (err) {
+            console.log(err);
+          } else {
+            var newVoteCount = results[0] + 1;
+
+            var query2 = "Update POST " +
+                         "Set vote_count = '"+newVoteCount+"' "+
+                         "Where ID = '"+dataReq[1]+"'";
+
+            conn.query(query2, function(q2Err, q2Results)
+            {
+              if (q2Err) {
+                console.log(q2Err);
+              }
+            });
+          }
+        });
     }
     else if (dataReq[0] == '/decrementVoteCount')
     {
+      var query1 = "SELECT vote_count FROM POST WHERE POST.ID = '" + dataReq[1] + "'";
 
+      conn.query(query1, function(err, results)
+      {
+        if (err) {
+          console.log(err);
+        } else {
+          var newVoteCount = results[0] - 1;
+
+          var query2 = "Update POST " +
+                       "Set vote_count = '"+newVoteCount+"' "+
+                       "Where ID = '"+dataReq[1]+"'";
+
+          conn.query(query2, function(q2Err, q2Results)
+          {
+            if (q2Err) {
+              console.log(q2Err);
+            }
+          });
+        }
+      });
     }
     else if (dataReq[0] == '/incrementAnswerCount')
     {
+      var query1 = "SELECT Answer_Count FROM POST WHERE POST.ID = '" + dataReq[1] + "'";
 
+      conn.query(query1, function(err, results)
+      {
+        if (err) {
+          console.log(err);
+        } else {
+          var newAnswerCount = results[0] + 1;
+
+          var query2 = "Update POST " +
+                       "Set Answer_Count = '"+newAnswerCount+"' "+
+                       "Where ID = '"+dataReq[1]+"'";
+
+          conn.query(query2, function(q2Err, q2Results)
+          {
+            if (q2Err) {
+              console.log(q2Err);
+            }
+          });
+        }
+      });
     }
     else if (dataReq[0] == '/decrementAnswerCount')
     {
+      var query1 = "SELECT Answer_Count FROM POST WHERE POST.ID = '" + dataReq[1] + "'";
 
+      conn.query(query1, function(err, results)
+      {
+        if (err) {
+          console.log(err);
+        } else {
+          var newAnswerCount = results[0] - 1;
+
+          var query2 = "Update POST " +
+                       "Set Answer_Count = '"+newAnswerCount+"' "+
+                       "Where ID = '"+dataReq[1]+"'";
+
+          conn.query(query2, function(q2Err, q2Results)
+          {
+            if (q2Err) {
+              console.log(q2Err);
+            }
+          });
+        }
+      });
     }
     else if (dataReq[0] == '/createPost')
     {
@@ -145,7 +223,7 @@ var server = http.createServer(function (req, res)
         }
       });
     }
-    else if (dataReq[0] == '/CreateComment')
+/*    else if (dataReq[0] == '/CreateComment')
     {
       // for /CreatePost-USER_EMAIL-POST_ID-BODY
 
@@ -163,7 +241,7 @@ var server = http.createServer(function (req, res)
       res.write(JSON.stringify({ message: "QUERY SUCCESSFUL"}));
                       //     res.write('<html><body><p>This is home Page.</p></body></html>');
                           // res.end();
-    }
+    }*/
     else if (dataReq[0] == '/incrementVoteCount')
     {
                         // for /CreatePost-USER_EMAIL-POST_ID-BODY
@@ -211,27 +289,8 @@ var server = http.createServer(function (req, res)
     else if (dataReq[0] == '/createAnswerOnPost')
     {
 
-      var query1 = "insert into answers (BODY) values(\'"+ dataReq[3] +"\') where post.id = \'"
-                    + dataReq[2] +"\' and APP_USER.EMAIL = \'"+ dataReq[1] + "\'";
+      var query1 = "insert into answers (USER_EMAIL, POST_ID, BODY) values('"+ dataReq[1] +"', '" + dataReq[2] + "', '" + dataReq[3] + "')";
 
-
-      conn.query(query1, function(err, results)
-      {
-
-        if (err) console.log(err);
-      });
-
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-
-      res.write(JSON.stringify({ message: "QUERY SUCCESSFUL"}));
-
-    }
-    else if (dataReq[0] == '/createPost')
-    {
-    //  createPost-email-title-body
-
-      var query1 = "insert into POST (title, body) values(\'"+ dataReq[2] +"\',"+ dataReq[3] +"\')
-                 + "insert into composes(USER_EMAIL) values(\'"+ dataReq[1] +");"
 
       conn.query(query1, function(err, results)
       {
@@ -280,6 +339,67 @@ var server = http.createServer(function (req, res)
           res.writeHead(200, { 'Content-Type': 'application/json' });
           res.write(JSON.stringify({message: "Query Successful"}));
         }
+      });
+    }
+
+    else if (dataReq[0] == '/getAllPosts')
+    {
+      //getAllPosts => (all post attributes for every post)
+      var query1 = "SELECT * FROM POST";
+
+      conn.query(query1, function(err, results)
+      {
+
+        if (err)
+        {
+          console.log(err);
+        }
+        else
+        {
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.write(JSON.stringify({results}));
+       }
+      });
+    }
+    else if (dataReq[0] == '/getAllPostsForUser')
+    {
+      //getAllPostsForUser-email => (all post attributes for posts where user.email = email)
+
+      var query1 = "SELECT * FROM POST, APP_USER where APP_USER.EMAIL = '"+dataReq[1]+"' ";
+
+      conn.query(query1, function(err, results)
+      {
+
+        if (err)
+        {
+          console.log(err);
+        }
+        else
+        {
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.write(JSON.stringify({results}));
+       }
+      });
+    }
+    else if (dataReq[0] == '/getAllAnswersForPost')
+    {
+      //getAllAnswersForPost-postid => (answers.body and user.email for answer tuples where answers.postid = postid)
+
+      var query1 = "SELECT a.BODY, u.First_Name, u.Last_Name FROM ANSWERS a, APP_USER u, POST p where a.POST_ID = '"+dataReq[1]+"' and " +
+                   "a.EMAIL = u.USER_EMAIL and u.POST_ID = p.id";
+
+      conn.query(query1, function(err, results)
+      {
+
+        if (err)
+        {
+          console.log(err);
+        }
+        else
+        {
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.write(JSON.stringify({results}));
+       }
       });
     }
 
